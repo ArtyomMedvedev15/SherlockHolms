@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Controller
 public class AdminController {
@@ -65,35 +63,16 @@ public class AdminController {
         @RequestParam(name = "cost_food")Integer cost_food,
         @RequestParam(name = "describe_food")String describe_food,
         @RequestParam("file") MultipartFile file
-        ){
+        ) throws IOException {
         Breakfast breakfast = new Breakfast();
         breakfast.setName_food(name_food);
         breakfast.setCost_food(cost_food);
         breakfast.setDescribe_food(describe_food);
-        breakfast.setFilename(file.getOriginalFilename());
 
+        saveFile(breakfast,file);
         breakfastRepo.save(breakfast);
      return "redirect:/AdminPage";
     }
-
-    //Future functionallity :)
-    private void saveFile(Breakfast breakfast, @RequestParam("file") MultipartFile file) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(uploadPath);
-
-            if (uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();//Уникальное имя файла
-            String resultFileName = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(uploadPath + "/" + resultFileName));
-
-            breakfast.setFilename(resultFileName);
-        }
-    }
-
 
     @GetMapping("/AdminPage/addMeals")
     public String addFoodMeals(){
@@ -111,8 +90,8 @@ public class AdminController {
         meals.setName_food(name_food);
         meals.setCost_food(cost_food);
         meals.setDescribe_food(describe_food);
-        meals.setFilename(file.getOriginalFilename());
 
+        saveFile(meals,file);
         mealsRepo.save(meals);
         return "redirect:/AdminPage";
     }
@@ -215,6 +194,8 @@ public class AdminController {
 
         return "listBreakFast";
     }
+
+
 
 }
 
