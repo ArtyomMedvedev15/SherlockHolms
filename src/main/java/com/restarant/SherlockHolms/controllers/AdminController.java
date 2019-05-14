@@ -4,6 +4,7 @@ import com.restarant.SherlockHolms.domain.*;
 import com.restarant.SherlockHolms.repos.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -162,7 +165,7 @@ public class AdminController {
         return "AddFoodDrinks";
     }
 
-    @PostMapping("/AdminPage/addDesserts")
+    @PostMapping("/AdminPage/addDrinks")
     public String addDrinksFood(
             @RequestParam(name = "name_food")String name_food,
             @RequestParam(name = "cost_food")Integer cost_food,
@@ -179,6 +182,39 @@ public class AdminController {
         return "redirect:/AdminPage";
     }
 
+    @GetMapping("/AdminPage/addChefs")
+    public String addChefs(Model model){
+        model.addAttribute("positions",PositionChef.values());
+        return "AddChefs";
+    }
+
+    @PostMapping("/AdminPage/addChefs")
+    public String addChefs(
+            @RequestParam(name = "FullName")String FullName,
+            @RequestParam(name = "position")String position,
+            @RequestParam("file") MultipartFile file,
+            Model model
+    ){
+        model.addAttribute("positions",PositionChef.values());
+        Chefs chefs = new Chefs();
+        chefs.setFullName(FullName);
+
+        Set<PositionChef>chefSet = new HashSet<>();
+        chefSet.add(PositionChef.valueOf(position));
+        chefs.setPositionChefs(chefSet);
+
+        chefs.setFilenameAvatarChefs(file.getOriginalFilename());
+
+        chefsRepo.save(chefs);
+        return "redirect:/AdminPage";
+    }
+
+
+    @GetMapping("/AdminPage/listBreakFast")
+    public String listofBreakfast(Model model){
+
+        return "listBreakFast";
+    }
 
 }
 

@@ -15,11 +15,16 @@
                 <a class="nav-link" href="/AdminPage/addSnacks">Add Food Snacks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addDesserts">Add Food Snacks</a>
+                <a class="nav-link" href="/AdminPage/addDesserts">Add Food Desserts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link" href="/AdminPage/addDrinks">Add Food Drinks</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/addChefs">Add Chef</a>
+            </li>
+
+
         </ul>
     </div>
 </nav>
