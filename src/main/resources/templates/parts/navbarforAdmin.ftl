@@ -9,10 +9,13 @@
                 <a class="nav-link" href="/AdminPage/addBreakFast">Add Food Breakfast</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="/AdminPage/addMeals">Add Food Meals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="/AdminPage/addSnacks">Add Food Snacks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/addDesserts">Add Food Snacks</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
