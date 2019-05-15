@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -213,46 +214,107 @@ public class AdminController {
 
     @GetMapping("/AdminPage/listBreakFast")
     public String listofBreakfast(Model model){
-        List<Breakfast> breakfasts = breakfastRepo.findAll();
-        model.addAttribute("foods",breakfasts);
+         model.addAttribute("foods",breakfastRepo.findAll());
         return "ListBreakfastFood";
     }
 
     @GetMapping("/AdminPage/listDrinksFood")
     public String listofDrinks(Model model){
-        List<Drinks> drinks = drinksRepo.findAll();
-        model.addAttribute("foods",drinks);
+         model.addAttribute("foods",drinksRepo.findAll());
         return "ListDrinksFood";
     }
 
     @GetMapping("/AdminPage/listMealsFood")
     public String listofMeals(Model model){
-        List<Meals> meals = mealsRepo.findAll();
-        model.addAttribute("foods",meals);
+         model.addAttribute("foods",mealsRepo.findAll());
         return "ListMealsFood";
     }
 
     @GetMapping("/AdminPage/listDessertsFood")
     public String listofDesserts(Model model){
-        List<Desserts> desserts = dessertsRepo.findAll();
-        model.addAttribute("foods",desserts);
+         model.addAttribute("foods",dessertsRepo.findAll());
         return "ListDessertsFood";
     }
 
     @GetMapping("/AdminPage/listSnacksFood")
     public String listofSnacks(Model model){
-        List<Snacks> snacks = snacksRepo.findAll();
-        model.addAttribute("foods",snacks);
+         model.addAttribute("foods",snacksRepo.findAll());
         return "ListSnacksFood";
     }
 
     @GetMapping("/AdminPage/listChefs")
     public String listofChefs(Model model){
-        List<Chefs> chefs = chefsRepo.findAll();
         List<PositionChef>position = Arrays.asList(PositionChef.values());
-        model.addAttribute("chefs",chefs);
+        model.addAttribute("chefs",chefsRepo.findAll());
         model.addAttribute("position",position);
         return "ListChefs";
+    }
+
+    @GetMapping("/AdminPage/listChefs/{chef.id}")
+    public String deleteChefById(@PathVariable("chef.id") String parameter){
+        chefsRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listBreakFast/{breakfast.id}")
+    public String deleteBreakfastById( @PathVariable("breakfast.id") String parameter){
+        breakfastRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listDessertsFood/{desserts.id}")
+    public String deleteDessertById(@PathVariable("desserts.id") String parameter){
+        dessertsRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listDrinksFood/{drinks.id}")
+    public String deleteDrinksById(@PathVariable("drinks.id") String parameter){
+        drinksRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listMealsFood/{meals.id}")
+    public String deleteMealsById(@PathVariable("meals.id") String parameter){
+        mealsRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listSnacksFood/{snacks.id}")
+    public String deleteSnakcsById(@PathVariable("snacks.id") String parameter){
+        snacksRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage";
+    }
+
+    @GetMapping("/AdminPage/listChefs/Edit/{chef.id}")
+    public String EditChef(Model model, @PathVariable("chef.id") String parameter){
+        model.addAttribute("positions",PositionChef.values());
+
+        return "EditChef";
+    }
+
+    @PostMapping("/AdminPage/listChefs/Edit/{chef.id}")
+    public String EditChef(
+            @PathVariable("chef.id") String parameter,
+            @RequestParam(name = "FullName") String FullName,
+            @RequestParam(name = "position") String position,
+            @RequestParam("file") MultipartFile file,
+            Model model
+            ) throws IOException {
+
+        Chefs chef = chefsRepo.getOne(Long.parseLong(parameter));
+        chef.setFullName(FullName);
+        Set<PositionChef>chefSet = new HashSet<>();
+        chefSet.add(PositionChef.valueOf(position));
+        chef.setPositionChefs(chefSet);
+
+        model.addAttribute("chefs",chef);
+
+        chefsService.saveFile(chef,file);
+
+        chefsRepo.save(chef);
+
+          return "redirect:/AdminPage";
     }
 
 }

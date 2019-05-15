@@ -6,6 +6,7 @@
             <th>Name</th>
             <th>Describe</th>
             <th>Photo</th>
+            <th>Delete</th>
             <th>Edit</th>
         </tr>
         </thead>
@@ -15,7 +16,8 @@
                 <td>${chef.fullName}</td>
                 <td><#list position as pos ><#sep >${pos}</#list></td>
                 <td><img src="/img/${chef.filenameAvatarChefs}"/> </td>
-                <td>Edit</td>
+                <td><a href="/AdminPage/listChefs/${chef.id}">Delete</a></td>
+                <td><a href="/AdminPage/listChefs/Edit/${chef.id}">Edit</a></td>
             </tr>
         </#list>
         </tbody>
