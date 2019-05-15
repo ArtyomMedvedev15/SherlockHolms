@@ -27,19 +27,19 @@
                 <a class="nav-link" href="/AdminPage/listBreakFast">List Breakfast</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listDrinksFood">List Breakfast</a>
+                <a class="nav-link" href="/AdminPage/listDrinksFood">List Drinks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listDessertsFood">List Breakfast</a>
+                <a class="nav-link" href="/AdminPage/listDessertsFood">List Desserts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listMealsFood">List Breakfast</a>
+                <a class="nav-link" href="/AdminPage/listMealsFood">List Meals</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listSnacksFood">List Breakfast</a>
+                <a class="nav-link" href="/AdminPage/listSnacksFood">List Snacks</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listChefs">List Breakfast</a>
+                <a class="nav-link" href="/AdminPage/listChefs">List Chefs</a>
             </li>
         </ul>
     </div>

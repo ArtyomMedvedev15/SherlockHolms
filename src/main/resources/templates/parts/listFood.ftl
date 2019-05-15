@@ -16,7 +16,6 @@
                 <td>${food.cost_food}</td>
                 <td>${food.describe_food}</td>
                 <td><img src="/img/${food.filename}"/></td>
-
             </tr>
         </#list>
         </tbody>
