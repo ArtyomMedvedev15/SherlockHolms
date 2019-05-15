@@ -23,8 +23,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="/AdminPage/addChefs">Add Chef</a>
             </li>
-
-
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listBreakFast">List Breakfast</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listDrinksFood">List Breakfast</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listDessertsFood">List Breakfast</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listMealsFood">List Breakfast</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listSnacksFood">List Breakfast</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/listChefs">List Breakfast</a>
+            </li>
         </ul>
     </div>
 </nav>

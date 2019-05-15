@@ -2,6 +2,7 @@ package com.restarant.SherlockHolms.controllers;
 
 import com.restarant.SherlockHolms.domain.*;
 import com.restarant.SherlockHolms.repos.*;
+import com.restarant.SherlockHolms.service.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +12,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
 public class AdminController {
     @Value("${upload.path}")
     private String uploadPath;
+
+    private final DessertsService dessertsService;
+
+    private final SnacksService snacksService;
+
+    private final MealsService mealsService;
+
+    private final DrinksService drinksService;
+
+    private final ChefsService chefsService;
+
+    private final BreakfastService breakfastService;
 
     private final BreakfastRepo breakfastRepo;
 
@@ -36,7 +51,7 @@ public class AdminController {
     private final ContactUsRepo contactUsRepo;
 
 
-    public AdminController(BreakfastRepo breakfastRepo, DessertsRepo dessertsRepo, MealsRepo mealsRepo, DrinksRepo drinksRepo, ChefsRepo chefsRepo, ReservationRepo reservationRepo, SnacksRepo snacksRepo, ContactUsRepo contactUsRepo) {
+    public AdminController(BreakfastRepo breakfastRepo, DessertsRepo dessertsRepo, MealsRepo mealsRepo, DrinksRepo drinksRepo, ChefsRepo chefsRepo, ReservationRepo reservationRepo, SnacksRepo snacksRepo, ContactUsRepo contactUsRepo, BreakfastService breakfastService, ChefsService chefsService, DrinksService drinksService, MealsService mealsService, SnacksService snacksService, DessertsService dessertsService) {
         this.breakfastRepo = breakfastRepo;
         this.dessertsRepo = dessertsRepo;
         this.mealsRepo = mealsRepo;
@@ -45,6 +60,12 @@ public class AdminController {
         this.reservationRepo = reservationRepo;
         this.snacksRepo = snacksRepo;
         this.contactUsRepo = contactUsRepo;
+        this.breakfastService = breakfastService;
+        this.chefsService = chefsService;
+        this.drinksService = drinksService;
+        this.mealsService = mealsService;
+        this.snacksService = snacksService;
+        this.dessertsService = dessertsService;
     }
 
     @GetMapping("/AdminPage")
@@ -69,7 +90,7 @@ public class AdminController {
         breakfast.setCost_food(cost_food);
         breakfast.setDescribe_food(describe_food);
 
-        saveFile(breakfast,file);
+        breakfastService.saveFile(breakfast,file);
         breakfastRepo.save(breakfast);
      return "redirect:/AdminPage";
     }
@@ -85,14 +106,14 @@ public class AdminController {
             @RequestParam(name = "cost_food")Integer cost_food,
             @RequestParam(name = "describe_food")String describe_food,
             @RequestParam("file") MultipartFile file
-    ){
+    ) throws IOException {
         Meals meals = new Meals();
         meals.setName_food(name_food);
         meals.setCost_food(cost_food);
         meals.setDescribe_food(describe_food);
 
-        saveFile(meals,file);
-        mealsRepo.save(meals);
+        mealsService.saveFile(meals,file);
+         mealsRepo.save(meals);
         return "redirect:/AdminPage";
     }
     @GetMapping("/AdminPage/addSnacks")
@@ -106,12 +127,13 @@ public class AdminController {
             @RequestParam(name = "cost_food")Integer cost_food,
             @RequestParam(name = "describe_food")String describe_food,
             @RequestParam("file") MultipartFile file
-    ){
+    ) throws IOException {
         Snacks snacks = new Snacks();
         snacks.setName_food(name_food);
         snacks.setCost_food(cost_food);
         snacks.setDescribe_food(describe_food);
-        snacks.setFilename(file.getOriginalFilename());
+
+        snacksService.saveFile(snacks,file);
 
         snacksRepo.save(snacks);
         return "redirect:/AdminPage";
@@ -128,13 +150,13 @@ public class AdminController {
             @RequestParam(name = "cost_food")Integer cost_food,
             @RequestParam(name = "describe_food")String describe_food,
             @RequestParam("file") MultipartFile file
-    ){
+    ) throws IOException {
         Desserts desserts = new Desserts();
         desserts.setName_food(name_food);
         desserts.setCost_food(cost_food);
         desserts.setDescribe_food(describe_food);
-        desserts.setFilename(file.getOriginalFilename());
 
+        dessertsService.saveFile(desserts,file);
         dessertsRepo.save(desserts);
         return "redirect:/AdminPage";
     }
@@ -150,12 +172,13 @@ public class AdminController {
             @RequestParam(name = "cost_food")Integer cost_food,
             @RequestParam(name = "describe_food")String describe_food,
             @RequestParam("file") MultipartFile file
-    ){
+    ) throws IOException {
         Drinks drinks = new Drinks();
         drinks.setName_food(name_food);
         drinks.setCost_food(cost_food);
         drinks.setDescribe_food(describe_food);
-        drinks.setFilename(file.getOriginalFilename());
+
+        drinksService.saveFile(drinks,file);
 
         drinksRepo.save(drinks);
         return "redirect:/AdminPage";
@@ -173,7 +196,7 @@ public class AdminController {
             @RequestParam(name = "position")String position,
             @RequestParam("file") MultipartFile file,
             Model model
-    ){
+    ) throws IOException {
         model.addAttribute("positions",PositionChef.values());
         Chefs chefs = new Chefs();
         chefs.setFullName(FullName);
@@ -182,8 +205,7 @@ public class AdminController {
         chefSet.add(PositionChef.valueOf(position));
         chefs.setPositionChefs(chefSet);
 
-        chefs.setFilenameAvatarChefs(file.getOriginalFilename());
-
+        chefsService.saveFile(chefs,file);
         chefsRepo.save(chefs);
         return "redirect:/AdminPage";
     }
@@ -191,11 +213,47 @@ public class AdminController {
 
     @GetMapping("/AdminPage/listBreakFast")
     public String listofBreakfast(Model model){
-
-        return "listBreakFast";
+        List<Breakfast> breakfasts = breakfastRepo.findAll();
+        model.addAttribute("foods",breakfasts);
+        return "ListBreakfastFood";
     }
 
+    @GetMapping("/AdminPage/listDrinksFood")
+    public String listofDrinks(Model model){
+        List<Drinks> drinks = drinksRepo.findAll();
+        model.addAttribute("foods",drinks);
+        return "ListDrinksFood";
+    }
 
+    @GetMapping("/AdminPage/listMealsFood")
+    public String listofMeals(Model model){
+        List<Meals> meals = mealsRepo.findAll();
+        model.addAttribute("foods",meals);
+        return "ListMealsFood";
+    }
+
+    @GetMapping("/AdminPage/listDessertsFood")
+    public String listofDesserts(Model model){
+        List<Desserts> desserts = dessertsRepo.findAll();
+        model.addAttribute("foods",desserts);
+        return "ListDessertsFood";
+    }
+
+    @GetMapping("/AdminPage/listSnacksFood")
+    public String listofSnacks(Model model){
+        List<Snacks> snacks = snacksRepo.findAll();
+        model.addAttribute("foods",snacks);
+        return "ListSnacksFood";
+    }
+
+    @GetMapping("/AdminPage/listChefs")
+    public String listofChefs(Model model){
+        List<Chefs> chefs = chefsRepo.findAll();
+        List<PositionChef>position = Arrays.asList(PositionChef.values());
+        model.addAttribute("chefs",chefs);
+        model.addAttribute("position",position);
+        return "ListChefs";
+    }
 
 }
 

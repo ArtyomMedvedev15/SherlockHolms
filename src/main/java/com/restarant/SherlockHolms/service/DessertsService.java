@@ -1,6 +1,6 @@
 package com.restarant.SherlockHolms.service;
 
-import com.restarant.SherlockHolms.domain.Meals;
+import com.restarant.SherlockHolms.domain.Desserts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,11 +11,11 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Service
-public class MealsService {
+public class DessertsService {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public void saveFile(Meals meals, @RequestParam("file") MultipartFile file) throws IOException {
+    public void saveFile(Desserts desserts, @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -28,7 +28,7 @@ public class MealsService {
 
             file.transferTo(new File(uploadPath + "/" + resultFileName));
 
-            meals.setFilename(resultFileName);
+            desserts.setFilename(resultFileName);
         }
     }
 }
