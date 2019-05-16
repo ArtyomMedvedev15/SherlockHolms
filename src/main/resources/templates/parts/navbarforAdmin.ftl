@@ -41,6 +41,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="/AdminPage/listChefs">List Chefs</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/ListReservation">List reservation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/ListContacts">List contacts</a>
+            </li>
         </ul>
     </div>
 </nav>

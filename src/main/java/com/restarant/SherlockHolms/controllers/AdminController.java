@@ -447,7 +447,47 @@ public class AdminController {
         snacksRepo.save(snacks);
 
         return "redirect:/AdminPage/listSnacksFood";
-
     }
+
+
+    @GetMapping("/AdminPage/ListReservation")
+    public String listReservation(Model model){
+        model.addAttribute("reservs",reservationRepo.findAll());
+        model.addAttribute("countP",CountofPeople.values());
+        return "ListReservation";
+    }
+
+    @GetMapping("/AdminPage/ListContacts")
+    public String listContacts(Model model){
+        model.addAttribute("conts",contactUsRepo.findAll());
+        return "ListContacts";
+    }
+
+    @GetMapping("/AdminPage/ListReservation/{res.id}")
+    public String deleteResByID(@PathVariable("res.id") String parameter){
+        dessertsRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage/ListReservation" ;
+    }
+
+    @GetMapping("/AdminPage/ListContacts/{cot.id}")
+    public String deleteContsById(@PathVariable("cot.id") String parameter){
+        contactUsRepo.deleteById(Long.parseLong(parameter));
+        return "redirect:/AdminPage/ListContacts";
+    }
+
+    @GetMapping("/AdminPage/ListReservation/Edit/{res.id}")
+    public String editReservation(
+            @PathVariable("res.id") String parameter
+
+    ){
+        return "redirect:/AdminPage/ListReservation";
+    }
+
+
+
+
+
+
+
 }
 
