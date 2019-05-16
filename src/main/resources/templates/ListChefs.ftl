@@ -15,7 +15,7 @@
             <tr>
                 <td>${chef.fullName}</td>
                 <td><#list position as pos ><#sep >${pos}</#list></td>
-                <td><img src="/img/${chef.filenameAvatarChefs}"/> </td>
+                <td><img src="/img/${chef.filenameAvatarChefs}" width="77" height="80"/> </td>
                 <td><a href="/AdminPage/listChefs/${chef.id}">Delete</a></td>
                 <td><a href="/AdminPage/listChefs/Edit/${chef.id}">Edit</a></td>
             </tr>

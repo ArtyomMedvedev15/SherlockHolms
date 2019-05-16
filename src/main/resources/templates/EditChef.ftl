@@ -1,6 +1,5 @@
 <#import "parts/commomForAdmin.ftl" as c>
-<#import "parts/EditComponent.ftl" as d>
-<@c.page>
+ <@c.page>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group" id="fonty">
             <div class="col-sm-6">

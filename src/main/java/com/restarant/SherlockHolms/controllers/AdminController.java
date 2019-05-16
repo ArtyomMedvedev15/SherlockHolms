@@ -70,42 +70,42 @@ public class AdminController {
     }
 
     @GetMapping("/AdminPage")
-    public String adminPage(){
+    public String adminPage() {
         return "adminPage";
     }
 
     @GetMapping("/AdminPage/addBreakFast")
-    public String addBreakFast(){
+    public String addBreakFast() {
         return "AddFoodBreakfast";
     }
 
     @PostMapping("/AdminPage/addBreakFast")
     public String addFoodBreakFast(
-        @RequestParam(name = "name_food")String name_food,
-        @RequestParam(name = "cost_food")Integer cost_food,
-        @RequestParam(name = "describe_food")String describe_food,
-        @RequestParam("file") MultipartFile file
-        ) throws IOException {
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
         Breakfast breakfast = new Breakfast();
         breakfast.setName_food(name_food);
         breakfast.setCost_food(cost_food);
         breakfast.setDescribe_food(describe_food);
 
-        breakfastService.saveFile(breakfast,file);
+        breakfastService.saveFile(breakfast, file);
         breakfastRepo.save(breakfast);
-     return "redirect:/AdminPage";
+        return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/addMeals")
-    public String addFoodMeals(){
+    public String addFoodMeals() {
         return "AddFoodMeals";
     }
 
     @PostMapping("/AdminPage/addMeals")
     public String addFoodMeals(
-            @RequestParam(name = "name_food")String name_food,
-            @RequestParam(name = "cost_food")Integer cost_food,
-            @RequestParam(name = "describe_food")String describe_food,
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Meals meals = new Meals();
@@ -113,20 +113,21 @@ public class AdminController {
         meals.setCost_food(cost_food);
         meals.setDescribe_food(describe_food);
 
-        mealsService.saveFile(meals,file);
-         mealsRepo.save(meals);
+        mealsService.saveFile(meals, file);
+        mealsRepo.save(meals);
         return "redirect:/AdminPage";
     }
+
     @GetMapping("/AdminPage/addSnacks")
-    public String addFoodSnacks(){
+    public String addFoodSnacks() {
         return "AddFoodSnacks";
     }
 
     @PostMapping("/AdminPage/addSnacks")
     public String addFoodSnacks(
-            @RequestParam(name = "name_food")String name_food,
-            @RequestParam(name = "cost_food")Integer cost_food,
-            @RequestParam(name = "describe_food")String describe_food,
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Snacks snacks = new Snacks();
@@ -134,22 +135,22 @@ public class AdminController {
         snacks.setCost_food(cost_food);
         snacks.setDescribe_food(describe_food);
 
-        snacksService.saveFile(snacks,file);
+        snacksService.saveFile(snacks, file);
 
         snacksRepo.save(snacks);
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/addDesserts")
-    public String addDessertsFood(){
+    public String addDessertsFood() {
         return "AddFoodDesserts";
     }
 
     @PostMapping("/AdminPage/addDesserts")
     public String addDessertsFood(
-            @RequestParam(name = "name_food")String name_food,
-            @RequestParam(name = "cost_food")Integer cost_food,
-            @RequestParam(name = "describe_food")String describe_food,
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Desserts desserts = new Desserts();
@@ -157,21 +158,21 @@ public class AdminController {
         desserts.setCost_food(cost_food);
         desserts.setDescribe_food(describe_food);
 
-        dessertsService.saveFile(desserts,file);
+        dessertsService.saveFile(desserts, file);
         dessertsRepo.save(desserts);
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/addDrinks")
-    public String addDrinksFood(){
+    public String addDrinksFood() {
         return "AddFoodDrinks";
     }
 
     @PostMapping("/AdminPage/addDrinks")
     public String addDrinksFood(
-            @RequestParam(name = "name_food")String name_food,
-            @RequestParam(name = "cost_food")Integer cost_food,
-            @RequestParam(name = "describe_food")String describe_food,
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Drinks drinks = new Drinks();
@@ -179,116 +180,117 @@ public class AdminController {
         drinks.setCost_food(cost_food);
         drinks.setDescribe_food(describe_food);
 
-        drinksService.saveFile(drinks,file);
+        drinksService.saveFile(drinks, file);
 
         drinksRepo.save(drinks);
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/addChefs")
-    public String addChefs(Model model){
-        model.addAttribute("positions",PositionChef.values());
+    public String addChefs(Model model) {
+        model.addAttribute("positions", PositionChef.values());
         return "AddChefs";
     }
 
     @PostMapping("/AdminPage/addChefs")
     public String addChefs(
-            @RequestParam(name = "FullName")String FullName,
-            @RequestParam(name = "position")String position,
+            @RequestParam(name = "FullName") String FullName,
+            @RequestParam(name = "position") String position,
             @RequestParam("file") MultipartFile file,
             Model model
     ) throws IOException {
-        model.addAttribute("positions",PositionChef.values());
+        model.addAttribute("positions", PositionChef.values());
         Chefs chefs = new Chefs();
         chefs.setFullName(FullName);
 
-        Set<PositionChef>chefSet = new HashSet<>();
+        Set<PositionChef> chefSet = new HashSet<>();
         chefSet.add(PositionChef.valueOf(position));
         chefs.setPositionChefs(chefSet);
 
-        chefsService.saveFile(chefs,file);
+        chefsService.saveFile(chefs, file);
         chefsRepo.save(chefs);
         return "redirect:/AdminPage";
     }
 
 
     @GetMapping("/AdminPage/listBreakFast")
-    public String listofBreakfast(Model model){
-         model.addAttribute("foods",breakfastRepo.findAll());
+    public String listofBreakfast(Model model) {
+        model.addAttribute("foods", breakfastRepo.findAll());
         return "ListBreakfastFood";
     }
 
     @GetMapping("/AdminPage/listDrinksFood")
-    public String listofDrinks(Model model){
-         model.addAttribute("foods",drinksRepo.findAll());
+    public String listofDrinks(Model model) {
+        model.addAttribute("foods", drinksRepo.findAll());
         return "ListDrinksFood";
     }
 
     @GetMapping("/AdminPage/listMealsFood")
-    public String listofMeals(Model model){
-         model.addAttribute("foods",mealsRepo.findAll());
+    public String listofMeals(Model model) {
+        model.addAttribute("foods", mealsRepo.findAll());
         return "ListMealsFood";
     }
 
     @GetMapping("/AdminPage/listDessertsFood")
-    public String listofDesserts(Model model){
-         model.addAttribute("foods",dessertsRepo.findAll());
+    public String listofDesserts(Model model) {
+        model.addAttribute("foods", dessertsRepo.findAll());
         return "ListDessertsFood";
     }
 
     @GetMapping("/AdminPage/listSnacksFood")
-    public String listofSnacks(Model model){
-         model.addAttribute("foods",snacksRepo.findAll());
+    public String listofSnacks(Model model) {
+        model.addAttribute("foods", snacksRepo.findAll());
         return "ListSnacksFood";
     }
 
     @GetMapping("/AdminPage/listChefs")
-    public String listofChefs(Model model){
-        List<PositionChef>position = Arrays.asList(PositionChef.values());
-        model.addAttribute("chefs",chefsRepo.findAll());
-        model.addAttribute("position",position);
+    public String listofChefs(Model model) {
+        List<PositionChef> position = Arrays.asList(PositionChef.values());
+        model.addAttribute("chefs", chefsRepo.findAll());
+        model.addAttribute("position", position);
         return "ListChefs";
     }
 
     @GetMapping("/AdminPage/listChefs/{chef.id}")
-    public String deleteChefById(@PathVariable("chef.id") String parameter){
+    public String deleteChefById(@PathVariable("chef.id") String parameter) {
         chefsRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/listBreakFast/{breakfast.id}")
-    public String deleteBreakfastById( @PathVariable("breakfast.id") String parameter){
+    public String deleteBreakfastById(@PathVariable("breakfast.id") String parameter) {
         breakfastRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/listDessertsFood/{desserts.id}")
-    public String deleteDessertById(@PathVariable("desserts.id") String parameter){
+    public String deleteDessertById(@PathVariable("desserts.id") String parameter) {
         dessertsRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/listDrinksFood/{drinks.id}")
-    public String deleteDrinksById(@PathVariable("drinks.id") String parameter){
+    public String deleteDrinksById(@PathVariable("drinks.id") String parameter) {
         drinksRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/listMealsFood/{meals.id}")
-    public String deleteMealsById(@PathVariable("meals.id") String parameter){
+    public String deleteMealsById(@PathVariable("meals.id") String parameter) {
         mealsRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
     @GetMapping("/AdminPage/listSnacksFood/{snacks.id}")
-    public String deleteSnakcsById(@PathVariable("snacks.id") String parameter){
+    public String deleteSnakcsById(@PathVariable("snacks.id") String parameter) {
         snacksRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage";
     }
 
+
     @GetMapping("/AdminPage/listChefs/Edit/{chef.id}")
-    public String EditChef(Model model, @PathVariable("chef.id") String parameter){
-        model.addAttribute("positions",PositionChef.values());
+    public String EditChef(Model model, @PathVariable("chef.id") String parameter) {
+        model.addAttribute("positions", PositionChef.values());
 
         return "EditChef";
     }
@@ -300,22 +302,152 @@ public class AdminController {
             @RequestParam(name = "position") String position,
             @RequestParam("file") MultipartFile file,
             Model model
-            ) throws IOException {
+    ) throws IOException {
 
         Chefs chef = chefsRepo.getOne(Long.parseLong(parameter));
         chef.setFullName(FullName);
-        Set<PositionChef>chefSet = new HashSet<>();
+        Set<PositionChef> chefSet = new HashSet<>();
         chefSet.add(PositionChef.valueOf(position));
         chef.setPositionChefs(chefSet);
 
-        model.addAttribute("chefs",chef);
+        model.addAttribute("chefs", chef);
 
-        chefsService.saveFile(chef,file);
+        chefsService.saveFile(chef, file);
 
         chefsRepo.save(chef);
 
-          return "redirect:/AdminPage";
+        return "redirect:/AdminPage";
     }
 
+
+    @GetMapping("/AdminPage/listBreakFast/Edit/{breakfast.id}")
+    public String EditBreakfast(Model model, @PathVariable("breakfast.id") String parameter) {
+        model.addAttribute("bk_id", parameter);
+        return "EditBreakfast";
+    }
+
+    @PostMapping("/AdminPage/listBreakFast/Edit/{breakfast.id}")
+    public String EditBreakfast(
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("breakfast.id") String parameter)
+            throws IOException {
+        Breakfast breakfast = breakfastRepo.getOne(Long.parseLong(parameter));
+        breakfast.setName_food(name_food);
+        breakfast.setCost_food(cost_food);
+        breakfast.setDescribe_food(describe_food);
+        breakfastService.saveFile(breakfast, file);
+
+        breakfastRepo.save(breakfast);
+
+        return "redirect:/AdminPage/listBreakFast";
+    }
+
+    @GetMapping("/AdminPage/listDrinksFood/Edit/{drinks.id}")
+    public String EditDrinks(Model model, @PathVariable("drinks.id") String parameter) {
+        model.addAttribute("dk_id", parameter);
+        return "EditDrinks";
+    }
+
+    @PostMapping("/AdminPage/listDrinksFood/Edit/{drinks.id}")
+    public String EditDrinks(
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("drinks.id") String parameter)
+            throws IOException {
+        Drinks drinks = drinksRepo.getOne(Long.parseLong(parameter));
+        drinks.setName_food(name_food);
+        drinks.setCost_food(cost_food);
+        drinks.setDescribe_food(describe_food);
+        drinksService.saveFile(drinks, file);
+
+        drinksRepo.save(drinks);
+
+        return "redirect:/AdminPage/listDrinksFood";
+    }
+
+    @GetMapping("/AdminPage/listDessertsFood/Edit/{ds.id}")
+    public String EditDesserts(Model model, @PathVariable("ds.id") String parameter) {
+        model.addAttribute("ds_id", parameter);
+        return "EditDrinks";
+    }
+
+    @PostMapping("/AdminPage/listDessertsFood/Edit/{ds.id}")
+    public String EditDesserts(
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("ds.id") String parameter)
+            throws IOException {
+        Desserts desserts = dessertsRepo.getOne(Long.parseLong(parameter));
+        desserts.setName_food(name_food);
+        desserts.setCost_food(cost_food);
+        desserts.setDescribe_food(describe_food);
+        dessertsService.saveFile(desserts, file);
+
+
+        dessertsRepo.save(desserts);
+
+        return "redirect:/AdminPage/listDessertsFood";
+    }
+
+    @GetMapping("/AdminPage/listMealsFood/Edit/{ml.id}")
+    public String EditMeals(Model model, @PathVariable("ml.id") String parameter) {
+        model.addAttribute("ml_id", parameter);
+        return "EditMeals";
+    }
+
+    @PostMapping("/AdminPage/listMealsFood/Edit/{ml.id}")
+    public String EditMeals(
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("ml.id") String parameter)
+            throws IOException {
+        Meals meals = mealsRepo.getOne(Long.parseLong(parameter));
+        meals.setName_food(name_food);
+        meals.setCost_food(cost_food);
+        meals.setDescribe_food(describe_food);
+        mealsService.saveFile(meals, file);
+
+
+        mealsRepo.save(meals);
+
+        return "redirect:/AdminPage/listMealsFood";
+
+    }
+
+    @GetMapping("/AdminPage/listSnacksFood/Edit/{sn.id}")
+    public String EditSnack(Model model, @PathVariable("sn.id") String parameter) {
+        model.addAttribute("sn_id", parameter);
+        return "EditSnacks";
+    }
+
+    @PostMapping("/AdminPage/listSnacksFood/Edit/{sn.id}")
+    public String EditSnacks(
+            @RequestParam(name = "name_food") String name_food,
+            @RequestParam(name = "cost_food") Integer cost_food,
+            @RequestParam(name = "describe_food") String describe_food,
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("sn.id") String parameter)
+            throws IOException {
+        Snacks snacks = snacksRepo.getOne(Long.parseLong(parameter));
+        snacks.setName_food(name_food);
+        snacks.setCost_food(cost_food);
+        snacks.setDescribe_food(describe_food);
+        snacksService.saveFile(snacks, file);
+
+
+        snacksRepo.save(snacks);
+
+        return "redirect:/AdminPage/listSnacksFood";
+
+    }
 }
 
