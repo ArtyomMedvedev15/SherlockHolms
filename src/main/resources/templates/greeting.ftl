@@ -264,7 +264,6 @@
                                 <div class="tab-pane fade in active" id="breakfast">
                                     <div class="mu-tab-content-area">
                                         <div class="row">
-
                                             <div class="col-md-6">
                                                 <div class="mu-tab-content-left">
                                                     <ul class="mu-menu-item-nav">
@@ -272,41 +271,13 @@
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-1.jpg" alt="img">
+                                                                        <img class="media-object" src="/img/${break1.filename}" alt="img">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">English Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$15.85</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-2.jpg" alt="img">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">Chines Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$11.95</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-1.jpg" alt="img">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">Indian Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$15.85</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                                                    <h4 class="media-heading"><a href="#">${break1.name_food}</a></h4>
+                                                                    <span class="mu-menu-price">${break1.cost_food}</span>
+                                                                    <p>${break1.describe_food}</p>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -816,48 +787,41 @@
 
                             <div class="col-md-6">
                                 <div class="mu-reservation-left">
-                                    <form class="mu-reservation-form">
+                                    <form class="mu-reservation-form" method="post" action="/Reservation">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Full Name">
+                                                    <input type="text" name="Name" class="form-control" placeholder="Full Name">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control" placeholder="Email">
+                                                    <input type="email" name="email" class="form-control" placeholder="Email">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Phone Number">
+                                                    <input type="text" name="PhoneNumber" class="form-control" placeholder="Phone Number">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <select class="form-control">
+                                                    <select name="countofPeople" typeof="text" class="form-control">
                                                         <option value="0">How Many?</option>
-                                                        <option value="1 Person">1 Person</option>
-                                                        <option value="2 People">2 People</option>
-                                                        <option value="3 People">3 People</option>
-                                                        <option value="4 People">4 People</option>
-                                                        <option value="5 People">5 People</option>
-                                                        <option value="6 People">6 People</option>
-                                                        <option value="7 People">7 People</option>
-                                                        <option value="8 People">8 People</option>
-                                                        <option value="9 People">9 People</option>
-                                                        <option value="10 People">10 People</option>
+                                                        <#list counts as cos >
+                                                        <option>${cos}</option>
+                                                       </#list>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="datepicker" placeholder="Date">
+                                                    <input name="dateReservation" type="text" class="form-control" id="datepicker" placeholder="Date">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" cols="30" rows="10" placeholder="Your Message"></textarea>
+                                                    <textarea name="message" typeof="text" class="form-control" cols="30" rows="10" placeholder="Your Message"></textarea>
                                                 </div>
                                             </div>
                                             <button type="submit" class="mu-readmore-btn">Make Reservation</button>
@@ -1130,14 +1094,15 @@
 
                         <div class="mu-chef-content">
                             <ul class="mu-chef-nav">
+                                <#list chefs as chef >
                                 <li>
                                     <div class="mu-single-chef">
                                         <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-1.jpg" alt="chef img">
+                                            <img src="/img/${chef.filenameAvatarChefs}" alt="chef img">
                                         </figure>
                                         <div class="mu-single-chef-info">
-                                            <h4>Simon Jonson</h4>
-                                            <span>Head Chef</span>
+                                            <h4>${chef.fullName}</h4>
+                                            <span><#list chef.positionChefs as pos>${pos}</#list></span>
                                         </div>
                                         <div class="mu-single-chef-social">
                                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -1147,132 +1112,7 @@
                                         </div>
                                     </div>
                                 </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-2.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Kelly Wenzel</h4>
-                                            <span>Pizza Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-3.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Greg Hong</h4>
-                                            <span>Grill Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-4.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Marty Fukuda</h4>
-                                            <span>Burger Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-5.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Simon Jonson</h4>
-                                            <span>Head Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-1.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Kelly Wenzel</h4>
-                                            <span>Pizza Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="assets/img/chef/chef-2.jpg" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Greg Hong</h4>
-                                            <span>Grill Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="mu-single-chef">
-                                        <figure class="mu-single-chef-img">
-                                            <img src="" alt="chef img">
-                                        </figure>
-                                        <div class="mu-single-chef-info">
-                                            <h4>Marty Fukuda</h4>
-                                            <span>Burger Chef</span>
-                                        </div>
-                                        <div class="mu-single-chef-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                </li>
+                                </#list>
                             </ul>
                         </div>
                     </div>
@@ -1304,7 +1144,7 @@
                                         <!-- Email message div -->
                                         <div id="form-messages"></div>
                                         <!-- Start contact form -->
-                                        <form id="ajax-contact" method="post" class="mu-contact-form">
+                                        <form id="ajax-contact" method="post" action="/ContactsForms" class="mu-contact-form">
                                             <div class="form-group">
                                                 <label for="name">Your Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
@@ -1319,7 +1159,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="message">Message</label>
-                                                <textarea class="form-control" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
+                                                <textarea class="form-control" typeof="text" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
                                             </div>
                                             <button type="submit" class="mu-send-btn">Send Message</button>
                                         </form>
@@ -1375,9 +1215,6 @@
                             <a href="#"><span class="fa fa-google-plus"></span></a>
                             <a href="#"><span class="fa fa-linkedin"></span></a>
                             <a href="#"><span class="fa fa-youtube"></span></a>
-                        </div>
-                        <div class="mu-footer-copyright">
-                            <p>&copy; Copyright <a rel="nofollow" href="http://markups.io">markups.io</a>. All right reserved.</p>
                         </div>
                     </div>
                 </div>

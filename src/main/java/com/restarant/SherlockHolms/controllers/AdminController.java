@@ -3,6 +3,7 @@ package com.restarant.SherlockHolms.controllers;
 import com.restarant.SherlockHolms.domain.*;
 import com.restarant.SherlockHolms.repos.*;
 import com.restarant.SherlockHolms.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ import java.util.Set;
 public class AdminController {
     @Value("${upload.path}")
     private String uploadPath;
+
+    @Autowired
+    private MainControllerService mainControllerService;
 
     private final DessertsService dessertsService;
 
@@ -476,12 +480,41 @@ public class AdminController {
     }
 
     @GetMapping("/AdminPage/ListReservation/Edit/{res.id}")
-    public String editReservation(
-            @PathVariable("res.id") String parameter
-
+    public String EdtiReservationByID(Model model, @PathVariable("res.id") String parameter){
+     model.addAttribute("res.id",parameter);
+     model.addAttribute("counts",CountofPeople.values());
+        return "EditReservation";
+    }
+    @PostMapping("/AdminPage/ListReservation/Edit/{res.id}")
+    public String EditReservationById(
+            @RequestParam(name = "Name") String Name,
+            @RequestParam(name = "email") String email,
+            @RequestParam(name = "PhoneNumber") String phoneNumber,
+            @RequestParam(name = "countofPeople") String count,
+            @RequestParam(name = "dateReservation") String date,
+            @RequestParam(name = "message") String message,
+            @PathVariable("res.id") String parameter,
+            Model model
     ){
+
+        Reservation reservation = reservationRepo.getOne(Long.parseLong(parameter));
+
+        reservation.setName(Name);
+        reservation.setEmail(email);
+        reservation.setPhoneNumber(phoneNumber);
+        Set<CountofPeople> countofPeopleSet = new HashSet<>();
+        countofPeopleSet.add(CountofPeople.valueOf(count));
+        reservation.setCountofPeople(countofPeopleSet);
+
+        reservation.setMessage(message);
+        reservation.setDateReservation(mainControllerService.convertStringtoDate(date));
+
+        reservationRepo.save(reservation);
+
         return "redirect:/AdminPage/ListReservation";
     }
+
+
 
 
 
