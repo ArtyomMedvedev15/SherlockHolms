@@ -9,17 +9,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text" name="Name" class="form-control" placeholder="Full Name">
+                            <input type="text" value="${firstName}" name="Name" class="form-control" placeholder="Full Name">
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="email" name="email" class="form-control" placeholder="Email">
+                            <input type="email" value="${email}" name="email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <input type="text" name="PhoneNumber" class="form-control" placeholder="Phone Number">
+                            <input type="text" value="${Phonenumber}" name="PhoneNumber" class="form-control" placeholder="Phone Number">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea name="message" typeof="text" class="form-control" cols="30" rows="10" placeholder="Your Message"></textarea>
+                            <textarea name="message"  typeof="text" class="form-control" cols="30" rows="10" placeholder="Your Message">${mess}</textarea>
                         </div>
                     </div>
                     <button type="submit" >Make Reservation</button>

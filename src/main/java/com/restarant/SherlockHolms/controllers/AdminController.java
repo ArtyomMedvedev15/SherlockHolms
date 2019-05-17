@@ -481,8 +481,14 @@ public class AdminController {
 
     @GetMapping("/AdminPage/ListReservation/Edit/{res.id}")
     public String EdtiReservationByID(Model model, @PathVariable("res.id") String parameter){
+        Reservation reservation = reservationRepo.getOne(Long.parseLong(parameter));
      model.addAttribute("res.id",parameter);
      model.addAttribute("counts",CountofPeople.values());
+     model.addAttribute("firstName",reservation.getName());
+     model.addAttribute("email",reservation.getEmail());
+     model.addAttribute("Phonenumber",reservation.getPhoneNumber());
+      model.addAttribute("mess",reservation.getMessage());
+
         return "EditReservation";
     }
     @PostMapping("/AdminPage/ListReservation/Edit/{res.id}")
@@ -493,13 +499,13 @@ public class AdminController {
             @RequestParam(name = "countofPeople") String count,
             @RequestParam(name = "dateReservation") String date,
             @RequestParam(name = "message") String message,
-            @PathVariable("res.id") String parameter,
-            Model model
-    ){
+            @PathVariable("res.id") String parameter
+     ){
 
         Reservation reservation = reservationRepo.getOne(Long.parseLong(parameter));
 
-        reservation.setName(Name);
+
+         reservation.setName(Name);
         reservation.setEmail(email);
         reservation.setPhoneNumber(phoneNumber);
         Set<CountofPeople> countofPeopleSet = new HashSet<>();
@@ -513,14 +519,6 @@ public class AdminController {
 
         return "redirect:/AdminPage/ListReservation";
     }
-
-
-
-
-
-
-
-
 
 }
 
