@@ -1,13 +1,7 @@
 package com.restarant.SherlockHolms.controllers;
 
-import com.restarant.SherlockHolms.domain.ContactUs;
-import com.restarant.SherlockHolms.domain.CountofPeople;
-import com.restarant.SherlockHolms.domain.PositionChef;
-import com.restarant.SherlockHolms.domain.Reservation;
-import com.restarant.SherlockHolms.repos.BreakfastRepo;
-import com.restarant.SherlockHolms.repos.ChefsRepo;
-import com.restarant.SherlockHolms.repos.ContactUsRepo;
-import com.restarant.SherlockHolms.repos.ReservationRepo;
+import com.restarant.SherlockHolms.domain.*;
+import com.restarant.SherlockHolms.repos.*;
 import com.restarant.SherlockHolms.service.MainControllerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -25,26 +21,42 @@ public class MainController {
 
     private final BreakfastRepo breakfastRepo;
 
+    private final CommentRepo commentRepo;
+
     private final ReservationRepo reservationRepo;
 
     private final MainControllerService mainControllerService;
 
     private final ContactUsRepo contactUsRepo;
 
-    public MainController(ChefsRepo chefsRepo, BreakfastRepo breakfastRepo, ReservationRepo reservationRepo, MainControllerService mainControllerService, ContactUsRepo contactUsRepo) {
+    public MainController(ChefsRepo chefsRepo, BreakfastRepo breakfastRepo, ReservationRepo reservationRepo, MainControllerService mainControllerService, ContactUsRepo contactUsRepo, CommentRepo commentRepo) {
         this.chefsRepo = chefsRepo;
         this.breakfastRepo = breakfastRepo;
         this.reservationRepo = reservationRepo;
         this.mainControllerService = mainControllerService;
         this.contactUsRepo = contactUsRepo;
+        this.commentRepo = commentRepo;
     }
 
     @GetMapping("/")
     public String home(Model model){
+        List<Breakfast> RightSideBreakFast = new ArrayList<>();
+        List<Breakfast> LeftSideBreakFast = new ArrayList<>();
+        List<Meals>RightSideMeals = new ArrayList<>();
+        List<Meals>LeftSideMeals = new ArrayList<>();
+        List<Meals>RightSideDrinks = new ArrayList<>();
+        List<Meals>LeftSideDrinks = new ArrayList<>();
+        List<Meals>RightSideSnacks = new ArrayList<>();
+        List<Meals>LeftSideSnakcs = new ArrayList<>();
+        List<Meals>RightSideDesserts = new ArrayList<>();
+        List<Meals>LeftSideDesserts = new ArrayList<>();
+
+
+
         model.addAttribute("chefs",chefsRepo.findAll());
         model.addAttribute("position", PositionChef.values());
-        model.addAttribute("break1",breakfastRepo.getOne((long) 3));
         model.addAttribute("counts", CountofPeople.values());
+        model.addAttribute("CustomersList",commentRepo.findAll());
          return "greeting";
     }
 
@@ -85,6 +97,7 @@ public class MainController {
 
         return "redirect:/";
     }
+
 
 
 

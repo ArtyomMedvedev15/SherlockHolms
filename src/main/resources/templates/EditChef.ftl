@@ -3,7 +3,7 @@
     <form method="post" enctype="multipart/form-data">
         <div class="form-group" id="fonty">
             <div class="col-sm-6">
-                <input type="text" name="FullName" placeholder="Name food" class="form-control "/>
+                <input type="text" value="${edit.fullName}" name="FullName" placeholder="Name food" class="form-control "/>
             </div>
         </div>
         <div class="form-group" id="fonty">

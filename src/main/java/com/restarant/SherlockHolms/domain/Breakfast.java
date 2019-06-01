@@ -46,20 +46,21 @@ public class Breakfast {
         this.id = id;
     }
 
-    public String getName_food() {
-        return name_food;
-    }
 
     public void setName_food(String name_food) {
         this.name_food = name_food;
     }
 
-    public Integer getCost_food() {
-        return cost_food;
-    }
 
     public void setCost_food(Integer cost_food) {
         this.cost_food = cost_food;
     }
 
+    public String getName_food() {
+        return name_food;
+    }
+
+    public Integer getCost_food() {
+        return cost_food;
+    }
 }

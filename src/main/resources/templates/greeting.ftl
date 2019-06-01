@@ -86,6 +86,7 @@
                         <li><a href="#mu-gallery">GALLERY</a></li>
                         <li><a href="#mu-chef">OUR CHEFS</a></li>
                         <li><a href="#mu-contact">CONTACT</a></li>
+                        <li><a href="/Comment">COMMENT</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -105,7 +106,7 @@
                     <!-- Top slider content -->
                     <div class="mu-top-slider-content">
                         <span class="mu-slider-small-title">Welcome</span>
-                        <h2 class="mu-slider-title">To The OsteriaX</h2>
+                        <h2 class="mu-slider-title">To The SherlockH</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque voluptatem accusamus non quidem, deleniti optio.</p>
                         <a href="#mu-reservation" class="mu-readmore-btn mu-reservation-btn">BOOK A TABLE</a>
                     </div>
@@ -271,13 +272,13 @@
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src="/img/${break1.filename}" alt="img">
+                                                                        <img class="media-object" src=" " alt="img">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">${break1.name_food}</a></h4>
-                                                                    <span class="mu-menu-price">${break1.cost_food}</span>
-                                                                    <p>${break1.describe_food}</p>
+                                                                    <h4 class="media-heading"><a href="#"></a></h4>
+                                                                    <span class="mu-menu-price"></span>
+                                                                    <p></p>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -824,6 +825,7 @@
                                                     <textarea name="message" typeof="text" class="form-control" cols="30" rows="10" placeholder="Your Message"></textarea>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                             <button type="submit" class="mu-readmore-btn">Make Reservation</button>
                                         </div>
                                     </form>
@@ -1040,36 +1042,18 @@
                             <div class="mu-testimonial-content">
                                 <!-- testimonial slider -->
                                 <ul class="mu-testimonial-slider">
+                                    <#list CustomersList as cus>
                                     <li>
                                         <div class="mu-testimonial-single">
                                             <div class="mu-testimonial-info">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
+                                                <p>${cus.commentVisitor}</p>
                                             </div>
                                             <div class="mu-testimonial-bio">
-                                                <p>- David Muller</p>
+                                                <p>- ${cus.nameVisitor}</p>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="mu-testimonial-single">
-                                            <div class="mu-testimonial-info">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                                            </div>
-                                            <div class="mu-testimonial-bio">
-                                                <p>- David Muller</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="mu-testimonial-single">
-                                            <div class="mu-testimonial-info">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate consequuntur ducimus cumque iure modi nesciunt recusandae eligendi vitae voluptatibus, voluptatum tempore, ipsum nisi perspiciatis. Rerum nesciunt fuga ab natus, dolorem?</p>
-                                            </div>
-                                            <div class="mu-testimonial-bio">
-                                                <p>- David Muller</p>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    </#list>
                                 </ul>
                             </div>
                         </div>
@@ -1144,7 +1128,7 @@
                                         <!-- Email message div -->
                                         <div id="form-messages"></div>
                                         <!-- Start contact form -->
-                                        <form id="ajax-contact" method="post" action="/ContactsForms" class="mu-contact-form">
+                                        <form method="post" action="/ContactsForms" class="mu-contact-form">
                                             <div class="form-group">
                                                 <label for="name">Your Name</label>
                                                 <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
@@ -1161,6 +1145,7 @@
                                                 <label for="message">Message</label>
                                                 <textarea class="form-control" typeof="text" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
                                             </div>
+                                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                             <button type="submit" class="mu-send-btn">Send Message</button>
                                         </form>
                                     </div>
@@ -1195,6 +1180,79 @@
             </div>
         </div>
     </section>
+    <!-- Comment section -->
+    <section id="mu-comment">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mu-comment-area">
+
+                        <div class="mu-title">
+                            <span class="mu-subtitle">Get In Touch</span>
+                            <h2>Contact Us</h2>
+                        </div>
+
+                        <div class="mu-comment-content">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="mu-comment-left">
+                                        <!-- Email message div -->
+                                        <div id="form-messages"></div>
+                                        <!-- Start contact form -->
+                                        <form method="post" action="/ContactsForms" class="mu-comment-form">
+                                            <div class="form-group">
+                                                <label for="name">Your Name</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email address</label>
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="subject">Subject</label>
+                                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message">Message</label>
+                                                <textarea class="form-control" typeof="text" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
+                                            </div>
+                                            <button type="submit" class="mu-send-btn">Send Message</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mu-comment-right">
+                                        <div class="mu-comment-widget">
+                                            <h3>Office Address</h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia temporibus corporis ea non consequatur porro corrupti hic voluptatibus assumenda, doloribus.</p>
+                                            <address>
+                                                <p><i class="fa fa-phone"></i> (850) 457 6688</p>
+                                                <p><i class="fa fa-envelope-o"></i>contact@markups.io</p>
+                                                <p><i class="fa fa-map-marker"></i>368 St. Panama City, Florida, USA</p>
+                                            </address>
+                                        </div>
+                                        <div class="mu-comment-widget">
+                                            <h3>Open Hours</h3>
+                                            <address>
+                                                <p><span>Monday - Friday</span> 9.00 am to 12 pm</p>
+                                                <p><span>Saturday</span> 9.00 am to 10 pm</p>
+                                                <p><span>Sunday</span> 10.00 am to 12 pm</p>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End comment section -->
     <!-- End Contact section -->
 
     <!-- Start Map section -->

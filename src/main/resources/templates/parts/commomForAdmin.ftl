@@ -26,7 +26,7 @@
         <link id="switcher" href="/static/css/theme-color/default-theme.css" rel="stylesheet">
 
         <!-- Main style sheet -->
-        <link href="/static/style.css" rel="stylesheet">
+        <link href="/static/styleAdmin.css" rel="stylesheet">
 
 
         <title>Hello, world!</title>

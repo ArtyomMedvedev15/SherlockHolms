@@ -47,6 +47,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/AdminPage/ListContacts">List contacts</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/AdminPage/ListComment">List contacts</a>
+            </li>
         </ul>
     </div>
 </nav>

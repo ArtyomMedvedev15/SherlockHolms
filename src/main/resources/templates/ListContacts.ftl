@@ -18,7 +18,7 @@
                 <td>${cot.email}</td>
                 <td>${cot.subject}</td>
                 <td>${cot.message}</td>
-                <td><a href="/AdminPage/ListReservation/${cot.id}">Delete</a></td>
+                <td><a class="btn-oval" href="/AdminPage/ListReservation/${cot.id}">Delete</a></td>
             </tr>
         </#list>
         </tbody>

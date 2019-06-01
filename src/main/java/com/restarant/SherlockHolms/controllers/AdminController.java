@@ -3,7 +3,6 @@ package com.restarant.SherlockHolms.controllers;
 import com.restarant.SherlockHolms.domain.*;
 import com.restarant.SherlockHolms.repos.*;
 import com.restarant.SherlockHolms.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +23,9 @@ public class AdminController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    @Autowired
-    private MainControllerService mainControllerService;
+    private final CommentRepo commentRepo;
+
+    private final MainControllerService mainControllerService;
 
     private final DessertsService dessertsService;
 
@@ -56,7 +56,7 @@ public class AdminController {
     private final ContactUsRepo contactUsRepo;
 
 
-    public AdminController(BreakfastRepo breakfastRepo, DessertsRepo dessertsRepo, MealsRepo mealsRepo, DrinksRepo drinksRepo, ChefsRepo chefsRepo, ReservationRepo reservationRepo, SnacksRepo snacksRepo, ContactUsRepo contactUsRepo, BreakfastService breakfastService, ChefsService chefsService, DrinksService drinksService, MealsService mealsService, SnacksService snacksService, DessertsService dessertsService) {
+    public AdminController(BreakfastRepo breakfastRepo, DessertsRepo dessertsRepo, MealsRepo mealsRepo, DrinksRepo drinksRepo, ChefsRepo chefsRepo, ReservationRepo reservationRepo, SnacksRepo snacksRepo, ContactUsRepo contactUsRepo, BreakfastService breakfastService, ChefsService chefsService, DrinksService drinksService, MealsService mealsService, SnacksService snacksService, DessertsService dessertsService, MainControllerService mainControllerService, CommentRepo commentRepo) {
         this.breakfastRepo = breakfastRepo;
         this.dessertsRepo = dessertsRepo;
         this.mealsRepo = mealsRepo;
@@ -71,6 +71,8 @@ public class AdminController {
         this.mealsService = mealsService;
         this.snacksService = snacksService;
         this.dessertsService = dessertsService;
+        this.mainControllerService = mainControllerService;
+        this.commentRepo = commentRepo;
     }
 
     @GetMapping("/AdminPage")
@@ -295,7 +297,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listChefs/Edit/{chef.id}")
     public String EditChef(Model model, @PathVariable("chef.id") String parameter) {
         model.addAttribute("positions", PositionChef.values());
-
+        model.addAttribute("edit",chefsRepo.getOne(Long.parseLong(parameter)));
         return "EditChef";
     }
 
@@ -327,6 +329,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listBreakFast/Edit/{breakfast.id}")
     public String EditBreakfast(Model model, @PathVariable("breakfast.id") String parameter) {
         model.addAttribute("bk_id", parameter);
+        model.addAttribute("edit",breakfastRepo.getOne(Long.parseLong(parameter)));
         return "EditBreakfast";
     }
 
@@ -352,6 +355,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listDrinksFood/Edit/{drinks.id}")
     public String EditDrinks(Model model, @PathVariable("drinks.id") String parameter) {
         model.addAttribute("dk_id", parameter);
+        model.addAttribute("edit",drinksRepo.getOne(Long.parseLong(parameter)));
         return "EditDrinks";
     }
 
@@ -377,6 +381,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listDessertsFood/Edit/{ds.id}")
     public String EditDesserts(Model model, @PathVariable("ds.id") String parameter) {
         model.addAttribute("ds_id", parameter);
+        model.addAttribute("edit",dessertsRepo.getOne(Long.parseLong(parameter)));
         return "EditDrinks";
     }
 
@@ -403,6 +408,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listMealsFood/Edit/{ml.id}")
     public String EditMeals(Model model, @PathVariable("ml.id") String parameter) {
         model.addAttribute("ml_id", parameter);
+        model.addAttribute("edit",mealsRepo.getOne(Long.parseLong(parameter)));
         return "EditMeals";
     }
 
@@ -430,6 +436,7 @@ public class AdminController {
     @GetMapping("/AdminPage/listSnacksFood/Edit/{sn.id}")
     public String EditSnack(Model model, @PathVariable("sn.id") String parameter) {
         model.addAttribute("sn_id", parameter);
+        model.addAttribute("edit",snacksRepo.getOne(Long.parseLong(parameter)));
         return "EditSnacks";
     }
 
@@ -469,7 +476,7 @@ public class AdminController {
 
     @GetMapping("/AdminPage/ListReservation/{res.id}")
     public String deleteResByID(@PathVariable("res.id") String parameter){
-        dessertsRepo.deleteById(Long.parseLong(parameter));
+        reservationRepo.deleteById(Long.parseLong(parameter));
         return "redirect:/AdminPage/ListReservation" ;
     }
 
@@ -482,13 +489,7 @@ public class AdminController {
     @GetMapping("/AdminPage/ListReservation/Edit/{res.id}")
     public String EdtiReservationByID(Model model, @PathVariable("res.id") String parameter){
         Reservation reservation = reservationRepo.getOne(Long.parseLong(parameter));
-     model.addAttribute("res.id",parameter);
-     model.addAttribute("counts",CountofPeople.values());
-     model.addAttribute("firstName",reservation.getName());
-     model.addAttribute("email",reservation.getEmail());
-     model.addAttribute("Phonenumber",reservation.getPhoneNumber());
-      model.addAttribute("mess",reservation.getMessage());
-
+        model.addAttribute("edit",reservationRepo.getOne(Long.parseLong(parameter)));
         return "EditReservation";
     }
     @PostMapping("/AdminPage/ListReservation/Edit/{res.id}")
@@ -518,6 +519,12 @@ public class AdminController {
         reservationRepo.save(reservation);
 
         return "redirect:/AdminPage/ListReservation";
+    }
+
+    @GetMapping("/AdminPage/ListComment")
+    public String listComment(Model model){
+        model.addAttribute("ListComment",commentRepo.findAll());
+        return "ListComment";
     }
 
 }

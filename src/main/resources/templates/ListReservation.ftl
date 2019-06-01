@@ -26,8 +26,8 @@
                 <td>${res.dateReservation}</td>
                 <#else><td></td>
                 </#if>
-                <td><a href="/AdminPage/ListReservation/Edit/${res.id}">Edit</a></td>
-                <td><a href="/AdminPage/ListReservation/${res.id}">Delete</a></td>
+                <td><a class="btn-oval" href="/AdminPage/ListReservation/Edit/${res.id}">Edit</a></td>
+                <td><a class="btn-oval" href="/AdminPage/ListReservation/${res.id}">Delete</a></td>
 
               </tr>
         </#list>
