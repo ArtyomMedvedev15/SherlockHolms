@@ -75,7 +75,7 @@ public class AdminController {
         this.commentRepo = commentRepo;
     }
 
-    @GetMapping("/AdminPage")
+    @GetMapping("/AdminPage/Home")
     public String adminPage() {
         return "adminPage";
     }
@@ -121,7 +121,7 @@ public class AdminController {
 
         mealsService.saveFile(meals, file);
         mealsRepo.save(meals);
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addSnacks")
@@ -144,7 +144,7 @@ public class AdminController {
         snacksService.saveFile(snacks, file);
 
         snacksRepo.save(snacks);
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addDesserts")
@@ -166,7 +166,7 @@ public class AdminController {
 
         dessertsService.saveFile(desserts, file);
         dessertsRepo.save(desserts);
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addDrinks")
@@ -189,7 +189,7 @@ public class AdminController {
         drinksService.saveFile(drinks, file);
 
         drinksRepo.save(drinks);
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addChefs")
@@ -215,7 +215,7 @@ public class AdminController {
 
         chefsService.saveFile(chefs, file);
         chefsRepo.save(chefs);
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
 
@@ -260,37 +260,37 @@ public class AdminController {
     @GetMapping("/AdminPage/listChefs/{chef.id}")
     public String deleteChefById(@PathVariable("chef.id") String parameter) {
         chefsRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/listBreakFast/{breakfast.id}")
     public String deleteBreakfastById(@PathVariable("breakfast.id") String parameter) {
         breakfastRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/listDessertsFood/{desserts.id}")
     public String deleteDessertById(@PathVariable("desserts.id") String parameter) {
         dessertsRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/listDrinksFood/{drinks.id}")
     public String deleteDrinksById(@PathVariable("drinks.id") String parameter) {
         drinksRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/listMealsFood/{meals.id}")
     public String deleteMealsById(@PathVariable("meals.id") String parameter) {
         mealsRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/listSnacksFood/{snacks.id}")
     public String deleteSnakcsById(@PathVariable("snacks.id") String parameter) {
         snacksRepo.deleteById(Long.parseLong(parameter));
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
 
@@ -322,7 +322,7 @@ public class AdminController {
 
         chefsRepo.save(chef);
 
-        return "redirect:/AdminPage";
+        return "redirect:/AdminPage/Home";
     }
 
 

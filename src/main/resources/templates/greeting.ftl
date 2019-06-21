@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OsteriaX | Home</title>
+    <title>SherlockHolms | Home</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="/static/image/favicon.ico" type="image/x-icon">
@@ -1082,7 +1082,7 @@
                                 <li>
                                     <div class="mu-single-chef">
                                         <figure class="mu-single-chef-img">
-                                            <img src="/img/${chef.filenameAvatarChefs}" alt="chef img">
+                                            <img height="250" width="50" src="/img/${chef.filenameAvatarChefs}" alt="chef img">
                                         </figure>
                                         <div class="mu-single-chef-info">
                                             <h4>${chef.fullName}</h4>

@@ -1,55 +1,85 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/AdminPage/addBreakFast">Add Food Breakfast</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addMeals">Add Food Meals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addSnacks">Add Food Snacks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addDesserts">Add Food Desserts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addDrinks">Add Food Drinks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/addChefs">Add Chef</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listBreakFast">List Breakfast</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listDrinksFood">List Drinks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listDessertsFood">List Desserts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listMealsFood">List Meals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listSnacksFood">List Snacks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/listChefs">List Chefs</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/ListReservation">List reservation</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/ListContacts">List contacts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/AdminPage/ListComment">List contacts</a>
-            </li>
-        </ul>
+<div class="navbar navbar-default navbar-static-top container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/AdminPage/Home">S<span>erlockHolms</span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li >
+                    <a  href="/AdminPage/Home">Home</a>
+                </li>
+                <li>
+                    <a href="/">Back to Home Page</a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
+                    "dropdown" data-toggle="dropdown" href="#">Add smth<i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/AdminPage/addChefs">Add chefs</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/addSnacks">Add snacks</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/addMeals">Add meals</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/addBreakFast">Add breakfast</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/addDrinks">Add drinks</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/addDesserts">Add desserts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover=
+                    "dropdown" data-toggle="dropdown" href="#">Lists<i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/AdminPage/ListComment">List Comment</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/ListReservation">List Reservations</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/ListContacts">List Contact</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listChefs">List Chefs</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listSnacksFood">List Snacks</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listMealsFood">List Meals</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listDessertsFood">List Desserts</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listDrinksFood">List Drinks</a>
+                        </li>
+                        <li>
+                            <a href="/AdminPage/listBreakFast">List Breakfast</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-</nav>
+
+
+
+
+

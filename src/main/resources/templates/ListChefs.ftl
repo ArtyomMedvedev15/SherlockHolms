@@ -14,7 +14,7 @@
         <#list chefs as chef>
             <tr>
                 <td>${chef.fullName}</td>
-                <td><#list position as pos ><#sep >${pos}</#list></td>
+                <td><#list chef.positionChefs as pos ><#sep >${pos.toString()}</#list></td>
                 <td><img src="/img/${chef.filenameAvatarChefs}" width="77" height="80"/> </td>
                 <td><a class="btn-oval" href="/AdminPage/listChefs/${chef.id}">Delete</a></td>
                 <td><a class="btn-oval" href="/AdminPage/listChefs/Edit/${chef.id}">Edit</a></td>

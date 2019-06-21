@@ -2,7 +2,9 @@
     <form method="post" enctype="multipart/form-data">
         <div class="form-group" id="fonty">
             <div class="col-sm-6">
-                <input type="text" name="FullName" placeholder="Name food" class="form-control "/>
+                <label>
+                    Input name chef:<input type="text" name="FullName" placeholder="Name chefs" class="form-control "/>
+                </label>
             </div>
         </div>
         <div class="form-group" id="fonty">
