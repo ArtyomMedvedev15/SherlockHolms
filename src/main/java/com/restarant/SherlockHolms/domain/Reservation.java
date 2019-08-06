@@ -82,4 +82,8 @@ public class Reservation {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public String getStringDate(){
+        return dateReservation.toString();
+    }
 }
