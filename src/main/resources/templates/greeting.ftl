@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 <head>
 
@@ -11,42 +11,34 @@
     <link rel="shortcut icon" href="/static/image/favicon.ico" type="image/x-icon">
 
     <!-- Font awesome -->
-    <link href="/static/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.css" rel="stylesheet"/>
     <!-- Bootstrap -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet"/>
     <!-- Slick slider -->
     <link rel="stylesheet" type="text/css" href="/static/css/slick.css">
     <!-- Date Picker -->
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-datepicker.css">
     <!-- Gallery Lightbox -->
-    <link href="/static/css/magnific-popup.css" rel="stylesheet">
+    <link href="/static/css/magnific-popup.css" rel="stylesheet"/>
     <!-- Theme color -->
     <link id="switcher" href="/static/css/theme-color/default-theme.css" rel="stylesheet">
 
-    <!-- Main style sheet -->
-    <link href="/static/style.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet"/>
 
-
-    <!-- Google Fonts -->
-
-    <!-- Prata for body  -->
     <link href='https://fonts.googleapis.com/css?family=Prata' rel='stylesheet' type='text/css'>
-    <!-- Tangerine for small title -->
     <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
-    <!-- Open Sans for title -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 </head>
 <body>
+
     <!--START SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#">
         <i class="fa fa-angle-up"></i>
@@ -70,7 +62,7 @@
 
                     <!--  Text based logo  -->
                     <a class="navbar-brand" href="/">
-                        Sherlock<span>H</span></a>
+                        Sherloc<span>K</span></a>
 
                     <!--  Image based logo  -->
                     <!-- <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo img"></a>  -->
@@ -86,8 +78,7 @@
                         <li><a href="#mu-gallery">GALLERY</a></li>
                         <li><a href="#mu-chef">OUR CHEFS</a></li>
                         <li><a href="#mu-contact">CONTACT</a></li>
-                        <li><a href="/Comment">COMMENT</a></li>
-                    </ul>
+                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
@@ -266,71 +257,49 @@
                                     <div class="mu-tab-content-area">
                                         <div class="row">
                                             <div class="col-md-6">
+
                                                 <div class="mu-tab-content-left">
                                                     <ul class="mu-menu-item-nav">
+                                                        <#list left as l>
                                                         <li>
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src=" " alt="img">
+                                                                        <img class="media-object" width="45" height="45" src="/img/${l.filename}">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#"></a></h4>
-                                                                    <span class="mu-menu-price"></span>
-                                                                    <p></p>
+                                                                    <h4 class="media-heading">${l.name_food}<a href="#"></a></h4>
+                                                                    <span class="mu-menu-price">${l.cost_food}$</span>
+                                                                    <p>${l.describe_food}</p>
                                                                 </div>
                                                             </div>
                                                         </li>
+                                                        </#list>
                                                     </ul>
                                                 </div>
+
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="mu-tab-content-right">
                                                     <ul class="mu-menu-item-nav">
+                                                        <#list right as rig>
                                                         <li>
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-1.jpg" alt="img">
+                                                                        <img class="media-object" src="/img/${rig.filename}" alt="img">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">English Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$15.85</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                                                    <h4 class="media-heading"><a href="#">${rig.name_food}</a></h4>
+                                                                    <span class="mu-menu-price">$${rig.cost_food}</span>
+                                                                    <p>${rig.describe_food}</p>
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                        <li>
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-2.jpg" alt="img">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">Chines Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$11.95</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="media">
-                                                                <div class="media-left">
-                                                                    <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-1.jpg" alt="img">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <h4 class="media-heading"><a href="#">Indian Breakfast</a></h4>
-                                                                    <span class="mu-menu-price">$15.85</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                        </#list>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -350,7 +319,7 @@
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-3.jpg" alt="img">
+                                                                        <img class="media-object" src="/static/image/Galery1.jpg" alt="img">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
@@ -745,7 +714,7 @@
                                                             <div class="media">
                                                                 <div class="media-left">
                                                                     <a href="#">
-                                                                        <img class="media-object" src="assets/img/menu/item-9.jpg" alt="img">
+                                                                        <img class="media-object"   alt="img">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body">
@@ -827,7 +796,7 @@
                                             </div>
                                             <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                             <button type="submit" class="mu-readmore-btn">Make Reservation</button>
-                                        </div>
+                                         </div>
                                     </form>
                                 </div>
                             </div>
@@ -1106,82 +1075,7 @@
     </section>
     <!-- End Chef Section -->
 
-
-
-    <!-- Start Contact section -->
     <section id="mu-contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="mu-contact-area">
-
-                        <div class="mu-title">
-                            <span class="mu-subtitle">Get In Touch</span>
-                            <h2>Contact Us</h2>
-                        </div>
-
-                        <div class="mu-contact-content">
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="mu-contact-left">
-                                        <!-- Email message div -->
-                                        <div id="form-messages"></div>
-                                        <!-- Start contact form -->
-                                        <form method="post" action="/ContactsForms" class="mu-contact-form">
-                                            <div class="form-group">
-                                                <label for="name">Your Name</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email">Email address</label>
-                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="subject">Subject</label>
-                                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="message">Message</label>
-                                                <textarea class="form-control" typeof="text" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
-                                            </div>
-                                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                            <button type="submit" class="mu-send-btn">Send Message</button>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="mu-contact-right">
-                                        <div class="mu-contact-widget">
-                                            <h3>Office Address</h3>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia temporibus corporis ea non consequatur porro corrupti hic voluptatibus assumenda, doloribus.</p>
-                                            <address>
-                                                <p><i class="fa fa-phone"></i> (850) 457 6688</p>
-                                                <p><i class="fa fa-envelope-o"></i>contact@markups.io</p>
-                                                <p><i class="fa fa-map-marker"></i>368 St. Panama City, Florida, USA</p>
-                                            </address>
-                                        </div>
-                                        <div class="mu-contact-widget">
-                                            <h3>Open Hours</h3>
-                                            <address>
-                                                <p><span>Monday - Friday</span> 9.00 am to 12 pm</p>
-                                                <p><span>Saturday</span> 9.00 am to 10 pm</p>
-                                                <p><span>Sunday</span> 10.00 am to 12 pm</p>
-                                            </address>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Comment section -->
-    <section id="mu-comment">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -1218,6 +1112,7 @@
                                                 <textarea class="form-control" typeof="text" id="message" name="message"  cols="30" rows="10" placeholder="Type Your Message" required></textarea>
                                             </div>
                                             <button type="submit" class="mu-send-btn">Send Message</button>
+                                            <input type="hidden" name="_csrf" value="${_csrf.token}" />
                                         </form>
                                     </div>
                                 </div>
@@ -1252,8 +1147,7 @@
         </div>
     </section>
 
-    <!-- End comment section -->
-    <!-- End Contact section -->
+     <!-- End Contact section -->
 
     <!-- Start Map section -->
     <section id="mu-map">
@@ -1295,7 +1189,6 @@
     <script type="text/javascript" src="/static/js/bootstrap-datepicker.js"></script>
     <!-- Ajax contact form  -->
     <script type="text/javascript" src="/static/js/app.js"></script>
-
     <!-- Custom js -->
     <script src="/static/js/custom.js"></script>
 

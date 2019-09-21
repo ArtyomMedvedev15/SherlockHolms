@@ -1,9 +1,9 @@
 package com.restarant.SherlockHolms.service;
 
 import com.restarant.SherlockHolms.domain.Meals;
+import com.restarant.SherlockHolms.repos.MealsRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -12,10 +12,16 @@ import java.util.UUID;
 
 @Service
 public class MealsService {
-    @Value("${upload.path}")
+    @Value("${uploads.path}")
     private String uploadPath;
 
-    public void saveFile(Meals meals, @RequestParam("file") MultipartFile file) throws IOException {
+    private final MealsRepo mealsRepo;
+
+    public MealsService(MealsRepo mealsRepo) {
+        this.mealsRepo = mealsRepo;
+    }
+
+    public void saveFile(Meals meals,  MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -30,5 +36,23 @@ public class MealsService {
 
             meals.setFilename(resultFileName);
         }
+    }
+
+    public boolean addMeals(Meals meals, String name_food, Integer cost_food, String describe_food) {
+        meals.setName_food(name_food);
+        meals.setCost_food(cost_food);
+        meals.setDescribe_food(describe_food);
+        mealsRepo.save(meals);
+        return true;
+    }
+
+    public boolean editMeals(String name_food, Integer cost_food, String describe_food, MultipartFile file, Meals meals) throws IOException {
+        meals.setName_food(name_food);
+        meals.setCost_food(cost_food);
+        meals.setDescribe_food(describe_food);
+        saveFile(meals, file);
+
+        mealsRepo.save(meals);
+    return true;
     }
 }

@@ -1,7 +1,6 @@
 package com.restarant.SherlockHolms.controllers;
 
-import com.restarant.SherlockHolms.domain.CommentVisitor;
-import com.restarant.SherlockHolms.repos.CommentRepo;
+import com.restarant.SherlockHolms.service.CommentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CommentController {
 
-   private final CommentRepo commentRepo;
+    private final CommentService commentService;
 
-    public CommentController(CommentRepo commentRepo) {
-        this.commentRepo = commentRepo;
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
 
@@ -28,8 +27,7 @@ public class CommentController {
             @RequestParam(name = "email")String email,
             @RequestParam(name = "message")String comment
     ){
-        CommentVisitor commentVisitor = new CommentVisitor(name,email,comment,null);
-        commentRepo.save(commentVisitor);
+        commentService.saveComment(name,email,comment);
         return "Comment";
     }
 }

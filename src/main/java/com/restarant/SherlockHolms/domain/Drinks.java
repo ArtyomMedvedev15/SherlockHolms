@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Drinks_Table")
+
 public class Drinks {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,10 +32,11 @@ public class Drinks {
 
     public Drinks() { }
 
-    public Drinks(String name, Integer cost, String describe) {
-        this.name_food = name;
-        this.cost_food = cost;
-        this.describe_food = describe;
+    public Drinks(String name_food, Integer cost_food, String describe_food, String filename) {
+        this.name_food = name_food;
+        this.cost_food = cost_food;
+        this.describe_food = describe_food;
+        this.filename = filename;
     }
 
     public Long getId() {

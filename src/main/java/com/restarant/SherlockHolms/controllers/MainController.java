@@ -1,7 +1,11 @@
 package com.restarant.SherlockHolms.controllers;
 
-import com.restarant.SherlockHolms.domain.*;
+import com.restarant.SherlockHolms.domain.Breakfast;
+import com.restarant.SherlockHolms.domain.ContactUs;
+import com.restarant.SherlockHolms.domain.CountofPeople;
+import com.restarant.SherlockHolms.domain.PositionChef;
 import com.restarant.SherlockHolms.repos.*;
+import com.restarant.SherlockHolms.service.BreakfastService;
 import com.restarant.SherlockHolms.service.MainControllerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -29,35 +31,29 @@ public class MainController {
 
     private final ContactUsRepo contactUsRepo;
 
-    public MainController(ChefsRepo chefsRepo, BreakfastRepo breakfastRepo, ReservationRepo reservationRepo, MainControllerService mainControllerService, ContactUsRepo contactUsRepo, CommentRepo commentRepo) {
+    private final BreakfastService breakfastService;
+
+    public MainController(ChefsRepo chefsRepo, BreakfastRepo breakfastRepo, ReservationRepo reservationRepo, MainControllerService mainControllerService, ContactUsRepo contactUsRepo, CommentRepo commentRepo, BreakfastService breakfastService) {
         this.chefsRepo = chefsRepo;
         this.breakfastRepo = breakfastRepo;
         this.reservationRepo = reservationRepo;
         this.mainControllerService = mainControllerService;
         this.contactUsRepo = contactUsRepo;
         this.commentRepo = commentRepo;
+        this.breakfastService = breakfastService;
     }
 
     @GetMapping("/")
     public String home(Model model){
-        List<Breakfast> RightSideBreakFast = new ArrayList<>();
-        List<Breakfast> LeftSideBreakFast = new ArrayList<>();
-        List<Meals>RightSideMeals = new ArrayList<>();
-        List<Meals>LeftSideMeals = new ArrayList<>();
-        List<Meals>RightSideDrinks = new ArrayList<>();
-        List<Meals>LeftSideDrinks = new ArrayList<>();
-        List<Meals>RightSideSnacks = new ArrayList<>();
-        List<Meals>LeftSideSnakcs = new ArrayList<>();
-        List<Meals>RightSideDesserts = new ArrayList<>();
-        List<Meals>LeftSideDesserts = new ArrayList<>();
-
-
-
         model.addAttribute("chefs",chefsRepo.findAll());
         model.addAttribute("position", PositionChef.values());
         model.addAttribute("counts", CountofPeople.values());
         model.addAttribute("CustomersList",commentRepo.findAll());
-         return "greeting";
+        Map<String,List<Breakfast>> res = breakfastService.cutMassiveontwohalf(breakfastRepo.findAll());
+        model.addAttribute("left",res.get("left"));
+        model.addAttribute("right",res.get("right"));
+
+        return "greeting";
     }
 
     @PostMapping("/Reservation")
@@ -69,18 +65,8 @@ public class MainController {
             @RequestParam(name = "dateReservation")String date,
             @RequestParam(name = "message")String message
             ){
-        Reservation reservation = new Reservation();
-        reservation.setName(Name);
 
-        Set<CountofPeople> countofPeopleSet = new HashSet<>();
-        countofPeopleSet.add(CountofPeople.valueOf(count));
-        reservation.setCountofPeople(countofPeopleSet);
-        reservation.setEmail(email);
-
-        reservation.setMessage(message);
-        reservation.setDateReservation(mainControllerService.convertStringtoDate(date));
-        reservation.setPhoneNumber(phoneNumber);
-         reservationRepo.save(reservation);
+           mainControllerService.addReservation(Name,email,phoneNumber,count,date,message);
         return "redirect:/";
     }
 

@@ -14,13 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class AdminController {
-    @Value("${upload.path}")
+    @Value("${uploads.path}")
     private String uploadPath;
 
     private final CommentRepo commentRepo;
@@ -81,7 +79,8 @@ public class AdminController {
     }
 
     @GetMapping("/AdminPage/addBreakFast")
-    public String addBreakFast() {
+    public String addBreakFast(Model model) {
+        model.addAttribute("namePage","Add breakfast");
         return "AddFoodBreakfast";
     }
 
@@ -93,17 +92,17 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Breakfast breakfast = new Breakfast();
-        breakfast.setName_food(name_food);
-        breakfast.setCost_food(cost_food);
-        breakfast.setDescribe_food(describe_food);
 
         breakfastService.saveFile(breakfast, file);
-        breakfastRepo.save(breakfast);
-        return "redirect:/AdminPage";
+        breakfastService.addBreakfast(name_food,cost_food,describe_food,breakfast);
+
+        return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addMeals")
-    public String addFoodMeals() {
+    public String addFoodMeals(Model model) {
+        model.addAttribute("namePage","Add meals");
+
         return "AddFoodMeals";
     }
 
@@ -115,17 +114,16 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Meals meals = new Meals();
-        meals.setName_food(name_food);
-        meals.setCost_food(cost_food);
-        meals.setDescribe_food(describe_food);
 
         mealsService.saveFile(meals, file);
-        mealsRepo.save(meals);
+        mealsService.addMeals(meals,name_food,cost_food,describe_food);
+
         return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addSnacks")
-    public String addFoodSnacks() {
+    public String addFoodSnacks(Model model) {
+        model.addAttribute("namePage","Add snacks");
         return "AddFoodSnacks";
     }
 
@@ -137,18 +135,17 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Snacks snacks = new Snacks();
-        snacks.setName_food(name_food);
-        snacks.setCost_food(cost_food);
-        snacks.setDescribe_food(describe_food);
 
         snacksService.saveFile(snacks, file);
+        snacksService.addSnack(name_food,cost_food,describe_food,snacks);
 
-        snacksRepo.save(snacks);
-        return "redirect:/AdminPage/Home";
+         return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addDesserts")
-    public String addDessertsFood() {
+    public String addDessertsFood(Model model) {
+        model.addAttribute("namePage","Add dessert");
+
         return "AddFoodDesserts";
     }
 
@@ -160,17 +157,17 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Desserts desserts = new Desserts();
-        desserts.setName_food(name_food);
-        desserts.setCost_food(cost_food);
-        desserts.setDescribe_food(describe_food);
 
         dessertsService.saveFile(desserts, file);
-        dessertsRepo.save(desserts);
+        dessertsService.addDessert(name_food,cost_food,describe_food,desserts);
+
         return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addDrinks")
-    public String addDrinksFood() {
+    public String addDrinksFood(Model model) {
+        model.addAttribute("namePage","Add drinks");
+
         return "AddFoodDrinks";
     }
 
@@ -182,18 +179,17 @@ public class AdminController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         Drinks drinks = new Drinks();
-        drinks.setName_food(name_food);
-        drinks.setCost_food(cost_food);
-        drinks.setDescribe_food(describe_food);
 
         drinksService.saveFile(drinks, file);
+        drinksService.addDrinks(name_food,cost_food,describe_food,drinks);
 
-        drinksRepo.save(drinks);
         return "redirect:/AdminPage/Home";
     }
 
     @GetMapping("/AdminPage/addChefs")
     public String addChefs(Model model) {
+        model.addAttribute("namePage","Add chefs");
+
         model.addAttribute("positions", PositionChef.values());
         return "AddChefs";
     }
@@ -207,14 +203,11 @@ public class AdminController {
     ) throws IOException {
         model.addAttribute("positions", PositionChef.values());
         Chefs chefs = new Chefs();
-        chefs.setFullName(FullName);
 
-        Set<PositionChef> chefSet = new HashSet<>();
-        chefSet.add(PositionChef.valueOf(position));
-        chefs.setPositionChefs(chefSet);
 
         chefsService.saveFile(chefs, file);
-        chefsRepo.save(chefs);
+        chefsService.addChefs(FullName,position,chefs);
+
         return "redirect:/AdminPage/Home";
     }
 
@@ -311,16 +304,9 @@ public class AdminController {
     ) throws IOException {
 
         Chefs chef = chefsRepo.getOne(Long.parseLong(parameter));
-        chef.setFullName(FullName);
-        Set<PositionChef> chefSet = new HashSet<>();
-        chefSet.add(PositionChef.valueOf(position));
-        chef.setPositionChefs(chefSet);
-
         model.addAttribute("chefs", chef);
 
-        chefsService.saveFile(chef, file);
-
-        chefsRepo.save(chef);
+        chefsService.editChefs(FullName,position,file,chef);
 
         return "redirect:/AdminPage/Home";
     }
@@ -330,6 +316,7 @@ public class AdminController {
     public String EditBreakfast(Model model, @PathVariable("breakfast.id") String parameter) {
         model.addAttribute("bk_id", parameter);
         model.addAttribute("edit",breakfastRepo.getOne(Long.parseLong(parameter)));
+        model.addAttribute("namePage","Edit Breakfast by id = " + parameter);
         return "EditBreakfast";
     }
 
@@ -342,12 +329,8 @@ public class AdminController {
             @PathVariable("breakfast.id") String parameter)
             throws IOException {
         Breakfast breakfast = breakfastRepo.getOne(Long.parseLong(parameter));
-        breakfast.setName_food(name_food);
-        breakfast.setCost_food(cost_food);
-        breakfast.setDescribe_food(describe_food);
-        breakfastService.saveFile(breakfast, file);
 
-        breakfastRepo.save(breakfast);
+        breakfastService.editBreakfast(name_food,cost_food,describe_food,breakfast,file);
 
         return "redirect:/AdminPage/listBreakFast";
     }
@@ -356,6 +339,8 @@ public class AdminController {
     public String EditDrinks(Model model, @PathVariable("drinks.id") String parameter) {
         model.addAttribute("dk_id", parameter);
         model.addAttribute("edit",drinksRepo.getOne(Long.parseLong(parameter)));
+        model.addAttribute("namePage","Edit drinks by id = " + parameter);
+
         return "EditDrinks";
     }
 
@@ -368,12 +353,8 @@ public class AdminController {
             @PathVariable("drinks.id") String parameter)
             throws IOException {
         Drinks drinks = drinksRepo.getOne(Long.parseLong(parameter));
-        drinks.setName_food(name_food);
-        drinks.setCost_food(cost_food);
-        drinks.setDescribe_food(describe_food);
-        drinksService.saveFile(drinks, file);
 
-        drinksRepo.save(drinks);
+        drinksService.editDrinks(name_food,cost_food,describe_food,file,drinks);
 
         return "redirect:/AdminPage/listDrinksFood";
     }
@@ -382,6 +363,8 @@ public class AdminController {
     public String EditDesserts(Model model, @PathVariable("ds.id") String parameter) {
         model.addAttribute("ds_id", parameter);
         model.addAttribute("edit",dessertsRepo.getOne(Long.parseLong(parameter)));
+        model.addAttribute("namePage","Edit Dessert by id = " + parameter);
+
         return "EditDrinks";
     }
 
@@ -394,13 +377,8 @@ public class AdminController {
             @PathVariable("ds.id") String parameter)
             throws IOException {
         Desserts desserts = dessertsRepo.getOne(Long.parseLong(parameter));
-        desserts.setName_food(name_food);
-        desserts.setCost_food(cost_food);
-        desserts.setDescribe_food(describe_food);
-        dessertsService.saveFile(desserts, file);
 
-
-        dessertsRepo.save(desserts);
+        dessertsService.editDessert(name_food,cost_food,describe_food,file,desserts);
 
         return "redirect:/AdminPage/listDessertsFood";
     }
@@ -409,6 +387,8 @@ public class AdminController {
     public String EditMeals(Model model, @PathVariable("ml.id") String parameter) {
         model.addAttribute("ml_id", parameter);
         model.addAttribute("edit",mealsRepo.getOne(Long.parseLong(parameter)));
+        model.addAttribute("namePage","Edit meals by id = " + parameter);
+
         return "EditMeals";
     }
 
@@ -421,13 +401,8 @@ public class AdminController {
             @PathVariable("ml.id") String parameter)
             throws IOException {
         Meals meals = mealsRepo.getOne(Long.parseLong(parameter));
-        meals.setName_food(name_food);
-        meals.setCost_food(cost_food);
-        meals.setDescribe_food(describe_food);
-        mealsService.saveFile(meals, file);
 
-
-        mealsRepo.save(meals);
+        mealsService.editMeals(name_food,cost_food,describe_food,file,meals);
 
         return "redirect:/AdminPage/listMealsFood";
 
@@ -437,6 +412,8 @@ public class AdminController {
     public String EditSnack(Model model, @PathVariable("sn.id") String parameter) {
         model.addAttribute("sn_id", parameter);
         model.addAttribute("edit",snacksRepo.getOne(Long.parseLong(parameter)));
+        model.addAttribute("namePage","Edit snaks by id = " + parameter);
+
         return "EditSnacks";
     }
 
@@ -449,11 +426,8 @@ public class AdminController {
             @PathVariable("sn.id") String parameter)
             throws IOException {
         Snacks snacks = snacksRepo.getOne(Long.parseLong(parameter));
-        snacks.setName_food(name_food);
-        snacks.setCost_food(cost_food);
-        snacks.setDescribe_food(describe_food);
-        snacksService.saveFile(snacks, file);
 
+        snacksService.editSnack(name_food,cost_food,describe_food,file,snacks);
 
         snacksRepo.save(snacks);
 
@@ -505,18 +479,7 @@ public class AdminController {
 
         Reservation reservation = reservationRepo.getOne(Long.parseLong(parameter));
 
-
-         reservation.setName(Name);
-        reservation.setEmail(email);
-        reservation.setPhoneNumber(phoneNumber);
-        Set<CountofPeople> countofPeopleSet = new HashSet<>();
-        countofPeopleSet.add(CountofPeople.valueOf(count));
-        reservation.setCountofPeople(countofPeopleSet);
-
-        reservation.setMessage(message);
-        reservation.setDateReservation(mainControllerService.convertStringtoDate(date));
-
-        reservationRepo.save(reservation);
+        mainControllerService.editReservation(Name,email,phoneNumber,count,date,message,reservation);
 
         return "redirect:/AdminPage/ListReservation";
     }
@@ -526,6 +489,7 @@ public class AdminController {
         model.addAttribute("ListComment",commentRepo.findAll());
         return "ListComment";
     }
+
 
 }
 

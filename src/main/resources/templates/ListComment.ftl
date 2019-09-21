@@ -1,13 +1,13 @@
 <#import "parts/commomForAdmin.ftl" as c>
 <@c.page>
-<table id="blackText">
-    <thead>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
-        <th>id</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Comment</th>
-        <th>Rating</th>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Rating</th>
      </tr>
     </thead>
     <tbody>
